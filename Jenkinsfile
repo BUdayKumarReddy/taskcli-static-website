@@ -5,7 +5,8 @@ pipeline {
 
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/BUdayKumarReddy/taskcli-static-website.git'
+                git branch: 'main',
+                    url: 'https://github.com/BUdayKumarReddy/taskcli-static-website.git'
             }
         }
 
