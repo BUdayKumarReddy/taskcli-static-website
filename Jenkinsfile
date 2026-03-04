@@ -3,22 +3,19 @@ pipeline {
 
     stages {
 
-        stage('Clone Repository') {
-            steps {
-                git branch: 'main',
-                    url: 'https://github.com/BUdayKumarReddy/taskcli-static-website.git'
-            }
-        }
-
         stage('Verify Files') {
             steps {
                 sh 'ls -la'
             }
         }
 
-        stage('Build') {
+        stage('Deploy to Nginx') {
             steps {
-                echo "Static website - No build required"
+                sh '''
+                sudo rm -rf /usr/share/nginx/html/*
+                sudo cp -r * /usr/share/nginx/html/
+                sudo systemctl restart nginx
+                '''
             }
         }
     }
